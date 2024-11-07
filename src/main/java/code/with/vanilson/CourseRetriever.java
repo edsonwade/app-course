@@ -14,7 +14,7 @@ public class CourseRetriever {
         }
 
         try {
-            if (args[0] !=null && !args[0].isEmpty()) {
+            if (args[0] != null && !args[0].isEmpty()) {
                 retrieveCourse(args[0]);
             }
         } catch (Exception e) {
