@@ -1,0 +1,6 @@
+Extending the CLI Tool
+
+1- Http call -> HttpClient
+2-Response Object -> Java record
+3-Json->Object -> Implementation of Jackson Library to Covert Java Object to Json
+4-testing -Junit
