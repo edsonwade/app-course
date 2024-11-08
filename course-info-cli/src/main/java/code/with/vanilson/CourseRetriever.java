@@ -1,5 +1,9 @@
 package code.with.vanilson;
 
+import code.with.vanilson.repository.CourseRepository;
+import code.with.vanilson.service.CourseRecord;
+import code.with.vanilson.service.CourseRetrieveService;
+import code.with.vanilson.service.CourseStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +13,7 @@ public class CourseRetriever {
     public static final Logger log = LoggerFactory.getLogger(CourseRetriever.class);
 
     public static void main(String... args) {
-        log.info("Course is starting");
+        log.info("CourseRecord is starting");
         if (args.length == 0) {
             log.info("Please provide an author name as first argument.");
             return;
@@ -22,7 +26,7 @@ public class CourseRetriever {
             // the class are all final, because the record immutable was create o can not set new value.
 
             /* todo : it was to shwo how powerfull is record
-            var course = new Course(100, "at nam consequatur ea labore ea harum","t distinctio eum naccusamus ratione
+            var course = new CourseRecord(100, "at nam consequatur ea labore ea harum","t distinctio eum naccusamus ratione
              error aut"); // will not pe printed
             log.info("course: {}", course); ; // will not pe printed
             */
@@ -36,11 +40,15 @@ public class CourseRetriever {
         log.info("Retrieving courses for author {}", authorId);
         var service = new CourseRetrieveService();
         //filtering course
-        List<Course> courseToStore = service.getCoursesFor(authorId)
+        CourseRepository courseRepository = CourseRepository.getInstance("./courses.db");
+        CourseStorageService courseStorageService = new CourseStorageService(courseRepository);
+
+        List<CourseRecord> courseRecordToStore = service.getCoursesFor(authorId)
                 .stream()
                 .limit(12)
-                .filter(course -> course.id() % 2 == 0)
                 .toList();
-        log.info("Retrieved the following  {} courses {}", courseToStore.size(), courseToStore);
+        log.info("Retrieved the following  {} courses {}", courseRecordToStore.size(), courseRecordToStore);
+        courseStorageService.storeCourse(courseRecordToStore);
+        log.info("Courses successfully stored");
     }
 }

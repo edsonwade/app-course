@@ -1,34 +1,35 @@
 package code.with.vanilson;
 
+import code.with.vanilson.service.CourseRecord;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CourseTest {
+class CourseRecordTest {
     @Test
     void durationInMinutes() {
-        var course = new Course(1, "Test course", "Test body", "00:12:37");
+        var course = new CourseRecord("1", "Test course", "Test body", "00:12:37");
         assertEquals(12, course.durationInMinutes());
     }
 
     @Test
     void durationInMinutesOverHour() {
-        var course = new Course(1, "Test course", "Test body", "01:08:54.9613330");
+        var course = new CourseRecord("1", "Test course", "Test body", "01:08:54.9613330");
         assertEquals(68, course.durationInMinutes());
     }
 
     @Test
     void durationInMinutesZero() {
-        var course = new Course(1, "Test course", "Test body", "00:00:00");
+        var course = new CourseRecord("1", "Test course", "Test body", "00:00:00");
         assertEquals(0, course.durationInMinutes());
     }
 
     //Using ParameterizedTest
 
     /**
-     * Tests the {@link Course#durationInMinutes()} method using various input durations.
+     * Tests the {@link CourseRecord#durationInMinutes()} method using various input durations.
      * <p>
      * This parameterized test uses {@link CsvSource} to provide multiple sets of input values
      * and expected results. Each input represents a duration in the format of a time string,
@@ -51,7 +52,7 @@ class CourseTest {
                  00:00:00.0, 0
             """)
     void durationInMinuteWithParameterized(String input, long expected) {
-        var course = new Course(1, "Test course", "Test body", input);
+        var course = new CourseRecord("1", "Test course", "Test body", input);
         assertEquals(expected, course.durationInMinutes());
     }
 

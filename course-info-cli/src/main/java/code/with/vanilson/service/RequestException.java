@@ -1,4 +1,4 @@
-package code.with.vanilson;
+package code.with.vanilson.service;
 
 /**
  * RequestException
