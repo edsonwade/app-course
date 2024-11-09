@@ -19,14 +19,31 @@ import java.util.List;
  * @version 1.0
  * @since 2024-11-09
  */
+
+/**
+ * The CourseResource class provides RESTful endpoints for managing courses.
+ * It allows clients to retrieve a list of all courses or a specific course by its ID.
+ */
 @Path("/courses")
 public class CourseResource {
     private static final Logger log = LoggerFactory.getLogger(CourseResource.class);
     private final CourseRepository courseRepository;
 
+    /**
+     * Constructs a CourseResource with the specified CourseRepository.
+     *
+     * @param courseRepository The repository used to access course data.
+     */
     public CourseResource(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
+
+    /**
+     * Retrieves a list of all courses.
+     *
+     * @return A list of Course objects in JSON format.
+     * @throws NotFoundException if there is an error retrieving courses from the database.
+     */
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -44,6 +61,14 @@ public class CourseResource {
 
     }
 
+    /**
+     * Retrieves a specific course by its ID.
+     *
+     * @param id The ID of the course to retrieve.
+     * @return The Course object with the specified ID in JSON format.
+     * @throws CourseNotFoundException if no course is found with the specified ID.
+     * @throws NotFoundException       if there is an error retrieving the course from the database.
+     */
     @GET
     @Path("/{id}") // Path for getting a course by ID
     @Produces(MediaType.APPLICATION_JSON)
