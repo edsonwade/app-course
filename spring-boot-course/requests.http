@@ -1,0 +1,24 @@
+GET localhost:8080/organizers
+
+###
+
+GET localhost:8080/events?organizerId=101
+
+###
+
+GET localhost:8080/events/501
+
+###
+
+GET localhost:8080/products?eventId=501
+
+###
+
+POST localhost:8080/registrations
+Content-Type: application/json
+
+{"productId": 801, "attendeeName": "Jesper de Jong"}
+
+###
+
+DELETE localhost:8080/registrations/d6f47f7b-0b90-4af7-9e53-188e4d022827

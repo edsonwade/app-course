@@ -12,6 +12,7 @@
         <module>course-info-repository</module>
         <module>course-info-cli</module>
         <module>course-info-server</module>
+        <module>spring-boot-course</module>
     </modules>
 
     <properties>
