@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo-container
+    ports:
+      - "27017:27017" # Expose MongoDB port
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root # Set the root username (optional)
+#      MONGO_INITDB_ROOT_PASSWORD: example # Set the root password (optional)
+#      MONGO_INITDB_DATABASE: mydatabase # Initial database to create (optional)
+    volumes:
+      - mongo-data:/data/db # Persistent storage for MongoDB data
+    networks:
+      - app-network
+
+  spring-boot-course:
+    build:
+      context: ./spring-boot-course  # Path to the Spring Boot project
+      dockerfile: Dockerfile  # Path to Dockerfile (if it's not in the root)
+    ports:
+      - "8081:8081"  # Exposing the server port
+    environment:
+      SERVER_PORT: 8081  # You can override the port if needed
+
+#  postgres:
+#    image: postgres:latest
+#    container_name: postgres-container
+#    ports:
+#      - "5432:5432" # Expose PostgreSQL port
+#    environment:
+#      POSTGRES_USER: postgres # Default PostgreSQL user
+#      POSTGRES_PASSWORD: example # Password for the default PostgreSQL user
+#      POSTGRES_DB: mydatabase # Default database to create
+#    volumes:
+#      - postgres-data:/var/lib/postgresql/data # Persistent storage for PostgreSQL data
+#    networks:
+#      - app-network
+
+#  spring-boot-course:
+#    build: .
+#    container_name: spring-boot-course-app
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_PROFILES_ACTIVE: docker
+#      SPRING_DATA_MONGODB_URI: mongodb://root:example@mongo:27017/mydatabase # MongoDB URI
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydatabase # PostgreSQL URI
+#      SPRING_DATASOURCE_USERNAME: postgres # PostgreSQL username
+#      SPRING_DATASOURCE_PASSWORD: example # PostgreSQL password
+#    depends_on:
+#      - mongo
+#      - postgres
+#    networks:
+#      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data: # Define a volume to persist MongoDB data
+  postgres-data: # Define a volume to persist PostgreSQL data
+

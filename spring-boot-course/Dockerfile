@@ -5,28 +5,27 @@ FROM maven:3.8.1-openjdk-17 as builder
 
 WORKDIR /app
 
-# First, copy only the pom.xml to leverage Docker cache for dependencies
+# Copy the pom.xml and build dependencies first to leverage Docker cache
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
 
-# Copy the rest of the source code and build the application
+# Copy the source code and build the application
 COPY src src
 RUN mvn package -DskipTests
-
 
 #########################################
 # Package Stage: Create the final container image
 #########################################
 FROM openjdk:17
 
-# Set environment variables
-ENV SERVER_PORT=8081
+# Set environment variables (allow for dynamic port configuration)
+ENV SERVER_PORT=${SERVER_PORT:-8081}
 
-# Copy the built JAR file from the build stage to the new image
-COPY --from=builder /app/target/*.jar /spring-boot-course-1.0-SNAPSHOT.jar
+# Copy the built JAR file from the build stage to the final image
+COPY --from=builder /app/target/spring-boot-course-1.0-SNAPSHOT.jar /spring-boot-course-1.0-SNAPSHOT.jar
 
 # Expose the port that the application will run on
 EXPOSE ${SERVER_PORT}
 
-# Specify the command to run your application
+# Command to run the application
 ENTRYPOINT ["java", "-jar", "/spring-boot-course-1.0-SNAPSHOT.jar"]

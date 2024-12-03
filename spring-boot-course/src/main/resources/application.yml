@@ -1,30 +1,42 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
 
-    datasource:
-      url: jdbc:postgresql://localhost:5432/spring_boot_course_24
-      username: postgres
-      password: Janina1.
-      driver-class-name: org.postgresql.Driver
-      validation-query: SELECT 1
-      test-on-borrow: true
-
-    jpa:
-      database-platform: org.hibernate.dialect.PostgreSQLDialect
-      properties:
-        hibernate.boot.allow_jdbc_metadata_access: false
-      hibernate:
-        ddl-auto: none
-      sql:
-        init:
-          mode: never
-
-    mvc:
-      dispatch-options-request: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring_boot_course_24
+    username: postgres
+    password: Janina1.
+    driver-class-name: org.postgresql.Driver
 
 
-     # base configuration of security
-    security:
-     user:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate.boot.allow_jdbc_metadata_access: false
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  sql:
+    init:
+      mode: never
+
+
+  mvc:
+    dispatch-options-request: true
+
+  #  # MongoDB configuration
+  #  mongodb:
+  #    uri: mongodb://localhost:27017/your_db_name  # Replace with your MongoDB connection URI
+  #    database: your_db_name  # Specify the database name to use
+  #    authentication-database: admin  # Optional, if your MongoDB setup requires authentication
+  #    username: your_mongodb_username  # Optional, if MongoDB requires a username
+  #    password: your_mongodb_password  # Optional, if MongoDB requires a password
+
+
+  # base configuration of security
+  security:
+    user:
       name: vani
       password: 123
 
