@@ -1,0 +1,156 @@
+version: '3.8'
+
+services:
+  # Event Service
+  event-service:
+    build:
+      context: course-calling-web/event-service  # Path to the event-service Dockerfile
+    image: event-service:0.0.1-SNAPSHOT
+    ports:
+      - "8081:8081"  # Expose port 8081 to the host
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker #active spring profile
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/mydb  # Example DB URL for PostgreSQL
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+    volumes:
+      - event-service-data:/app/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 10s
+
+  # Registration Service
+  registration-service:
+    build:
+      context: course-calling-web/registration-service  # Path to the registration-service Dockerfile
+    image: registration-service:0.0.1-SNAPSHOT
+    ports:
+      - "8082:8082"  # Expose port 8082 to the host
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - app-network
+    depends_on:
+      - event-service
+      - mongo
+    volumes:
+      - registration-service-data:/app/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 10s
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:latest  # Official PostgreSQL Docker image
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb  # Default database
+    volumes:
+      - postgres-data:/var/lib/postgresql/data  # Volume for data persistence
+    networks:
+      - app-network
+    ports:
+      - "5432:5432"  # Expose port 5432 for PostgreSQL
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "user", "-d", "mydb" ]
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 10s
+
+  # MySQL Database
+  mysql:
+    image: mysql:latest  # Official MySQL Docker image
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb  # Default database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql-data:/var/lib/mysql  # Volume for data persistence
+    networks:
+      - app-network
+    ports:
+      - "3306:3306"  # Expose port 3306 for MySQL
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-u", "user", "-p$password" ]
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 10s
+
+  # MongoDB Database
+  mongo:
+    image: mongo:latest  # Official MongoDB Docker image
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: mydb  # Default database
+    volumes:
+      - mongo-data:/data/db  # Volume for data persistence
+    networks:
+      - app-network
+    ports:
+      - "27017:27017"  # Expose port 27017 for MongoDB
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 10s
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - prometheus-data:/prometheus  # Volume for Prometheus data persistence
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Prometheus config
+    ports:
+      - "9090:9090"  # Expose port 9090 for Prometheus
+    networks:
+      - app-network
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin  # Default admin password for Grafana
+    ports:
+      - "3000:3000"  # Expose port 3000 for Grafana
+    networks:
+      - app-network
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana-data:/var/lib/grafana  # Volume for Grafana data persistence
+
+networks:
+  app-network:
+    driver: bridge  # Create a bridge network for service communication
+
+volumes:
+  event-service-data:
+    driver: local  # Volume for event-service persistence
+  registration-service-data:
+    driver: local  # Volume for registration-service persistence
+  postgres-data:
+    driver: local  # Volume for PostgreSQL persistence
+  mysql-data:
+    driver: local  # Volume for MySQL persistence
+  mongo-data:
+    driver: local  # Volume for MongoDB persistence
+  prometheus-data:
+    driver: local  # Volume for Prometheus persistence
+  grafana-data:
+    driver: local  # Volume for Grafana persistence

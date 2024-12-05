@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 15s  # Interval between scrapes for each service
+
+scrape_configs:
+  # Scrape metrics from the event-service
+  - job_name: 'event-service'
+    metrics_path: '/actuator/prometheus'  # Spring Boot Actuator endpoint for Prometheus
+    static_configs:
+      - targets: ['event-service:8081']  # The service is running on port 8081 in the Docker network

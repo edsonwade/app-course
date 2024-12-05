@@ -1,0 +1,22 @@
+tickets:
+  events:
+    url: http://events:8081
+
+  spring:
+    data:
+      mongodb:
+        host: mongo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,env,info,loggers,beans,conditions,mappings
+
+  endpoint:
+    health:
+      show-details: always
+    env:
+      show-values: always
+
+
