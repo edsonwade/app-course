@@ -1,0 +1,34 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pluralsight
+    username: postgres
+    password: Janina1.
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
+
+
+  # base configuration of security
+  security:
+    user:
+      name: vani
+      password: 123
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,env,info,loggers,beans,conditions,mappings
+
+  endpoint:
+    health:
+      show-details: always

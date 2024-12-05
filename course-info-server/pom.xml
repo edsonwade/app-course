@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>code.with.vanilson</groupId>
+        <artifactId>app-courseRecord</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>course-info-server</artifactId>
+    <properties>
+        <jersy.version>3.1.7</jersy.version>
+    </properties>
+
+
+    <dependencies>
+        <!-- Mockito is a mocking framework for unit tests in Java.
+        This dependency allows you to use Mockito with JUnit 5 (Jupiter). -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Hamcrest is a library of matchers for writing tests in a more readable way.
+        This dependency provides core matchers for assertions in tests. -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- JUnit 5 API for writing tests.
+        This dependency provides the necessary annotations and interfaces for writing unit tests. -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.11.0-M2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit 5 Jupiter Engine for running tests.
+        This dependency is necessary to execute the tests written using JUnit 5. -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.0</version> <!-- Use the latest version -->
+            <scope>test</scope>
+        </dependency>
+
+        <!-- SLF4J API is a simple logging facade for Java. This dependency provides the API for logging. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- This dependency bridges the Java Util Logging (JUL) to SLF4J, allowing you to redirect JUL logging to SLF4J. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- SLF4J Simple is a simple implementation of the SLF4J API.
+        This dependency provides a basic logging implementation for SLF4J. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- Jackson Annotations provides annotations for configuring JSON serialization and deserialization.
+        This dependency is part of the Jackson library. -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- Jakarta RESTful Web Services API.
+        This dependency provides the necessary interfaces and annotations for building RESTful web services. -->
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <!-- Jackson Databind is the core library for converting Java objects to and from JSON.
+         This dependency is essential for JSON serialization and deserialization. -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- This dependency refers to your own project module for course record information repository.
+        It is used to access course data. -->
+        <dependency>
+            <groupId>code.with.vanilson</groupId>
+            <artifactId>courseRecord-info-repository</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>${jersy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jersy.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersy.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <!-- The build section contains configuration for the build process of the project. -->
+        <plugins>
+            <!-- The plugins section defines the plugins that will be used during the build process. -->
+            <plugin>
+                <!-- The group ID of the Maven Shade Plugin, which is used to create an uber-jar (a jar containing all dependencies). -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <!-- The artifact ID of the Maven Shade Plugin. -->
+                <artifactId>maven-shade-plugin</artifactId>
+                <!-- The version of the Maven Shade Plugin to use. -->
+                <version>3.5.3</version>
+                <executions>
+                    <!-- The executions section defines when and how the plugin will be executed. -->
+                    <execution>
+                        <!-- The phase during which the plugin will be executed. In this case, it is during the package phase. -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- The goals section defines the specific goals that the plugin will execute. -->
+                            <goal>shade</goal> <!-- The goal to create an uber-jar that includes all dependencies. -->
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.with.vanilson.server.CourseServer</mainClass>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer">
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

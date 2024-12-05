@@ -1,0 +1,34 @@
+tickets:
+  events:
+    url: http://localhost:8081
+
+  spring:
+    data:
+      mongodb:
+        uri: mongodb+srv://vanilson:Janina1.@dev.4ezbsq2.mongodb.net/
+        authentication-database: registration_db
+        database: registration_db
+
+  # base configuration of security
+  security:
+    user:
+      name: vani
+      password: 123
+
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,env,info,loggers,beans,conditions,mappings
+
+  endpoint:
+    health:
+      show-details: always
+    env:
+      show-values: always
+
+
