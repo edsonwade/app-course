@@ -15,8 +15,20 @@ tickets:
       name: vani
       password: 123
 
+
 server:
   port: 8082
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,env,info,loggers,beans,conditions,mappings
+
+  endpoint:
+    health:
+      show-details: always
+    env:
+      show-values: always
 
 
