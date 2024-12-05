@@ -13,6 +13,7 @@
         <module>course-info-cli</module>
         <module>course-info-server</module>
         <module>spring-boot-course</module>
+        <module>course-calling-web</module>
     </modules>
 
     <properties>

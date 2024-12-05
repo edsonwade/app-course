@@ -11,6 +11,7 @@
 
     <artifactId>spring-boot-course</artifactId>
 
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>3.3.2</spring.boot.version>
