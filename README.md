@@ -13,27 +13,6 @@ This repository contains the following services:
 5. **Course Information Repository** 🏛️
 
 ---
-
-## Folder Structure 📂
-
-```plaintext
-app-course (root)
-├── **docker-compose.yml**          # Docker Compose file (located here)
-├── course-calling-web
-│   ├── **event-service**           # Event service package
-│   │   └── **Dockerfile**          # Dockerfile for event service
-│   └── **registration-service**    # Registration service package
-│       └── **Dockerfile**          # Dockerfile for registration service
-├── course-info-cli                 # Command-line interface for course info
-├── course-info-repository          # Repository layer for course info
-├── course-info-server              # Server for course info
-└── (Other modules...)
-```
-# Project Setup and Docker Workflow 🚀
-
-This guide explains how to set up and run the services using Docker and Docker Compose. It will help you build,
-configure, and deploy the services in the project.
-
 ---
 
 ## 1. **Folder Structure** 📂
@@ -48,6 +27,12 @@ app-course (root)
 │       └── Dockerfile          # Dockerfile for registration service
 └── (Other modules...)
 ```
+
+# Project Setup and Docker Workflow 🚀
+
+This guide explains how to set up and run the services using Docker and Docker Compose. It will help you build,
+configure, and deploy the services in the project.
+
 
 ## 2. Build Docker Images for Services 🛠️
 
