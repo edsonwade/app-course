@@ -10,6 +10,22 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
   sql:
     init:
       mode: always
+
+
+    mvc:
+      view:
+        prefix: /WEB-INF/jsp/
+        suffix: .jsp
+
+  devtools:
+    livereload:
+      enabled: true
+
+  security:
+    user:
+      name: vani
+      password: 123
