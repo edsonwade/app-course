@@ -35,6 +35,18 @@
           <option value="spring-boot-course" />
           <option value="spring-boot-course" />
           <option value="spring-boot-course" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="course-calling-web" />
+          <option value="registration-service" />
+          <option value="event-service" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -52,6 +64,18 @@
           <option value="org.apache.tomcat.embed:tomcat-embed-core:10.1.26" />
           <option value="ch.qos.logback:logback-core:1.5.6" />
           <option value="net.minidev:json-smart:2.5.1" />
+          <option value="org.apache.tomcat.embed:tomcat-embed-core:10.1.26" />
+          <option value="org.springframework:spring-webmvc:6.1.11" />
+          <option value="ch.qos.logback:logback-core:1.5.6" />
+          <option value="io.netty:netty-common:4.1.111.Final" />
+          <option value="io.netty:netty-handler:4.1.111.Final" />
+          <option value="org.springframework:spring-web:6.1.11" />
+          <option value="org.springframework:spring-webflux:6.1.11" />
+          <option value="org.springframework:spring-context:6.1.11" />
+          <option value="net.minidev:json-smart:2.5.1" />
+          <option value="org.xmlunit:xmlunit-core:2.9.1" />
+          <option value="org.springframework:spring-context:6.1.9" />
+          <option value="org.springframework:spring-context:6.1.9" />
         </list>
       </option>
       <option name="ignoredReasons">
@@ -66,6 +90,18 @@
           <option value="In progress" />
           <option value="Not exploitable" />
           <option value="In progress" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
