@@ -34,8 +34,8 @@ public class KafkaEventProducer {
                 String key = "truck_id " + i;
                 List<Product> value = getProducts();
                 try (KafkaProducer<String, List<Product>> producer = new KafkaProducer<>(props)) {
-                    ProducerRecord<String, List<Product>> record = new ProducerRecord<>(TOPIC, key, value );
-                    producer.send(record, (metadata, exception) -> {
+                    ProducerRecord<String, List<Product>> listRecord  = new ProducerRecord<>(TOPIC, key, value);
+                    producer.send(listRecord , (metadata, exception) -> {
                         if (exception != null) {
                             log.error("Error sending record", exception);
                         } else {
@@ -64,7 +64,8 @@ public class KafkaEventProducer {
                 new Product("Mobile", 5, BigDecimal.valueOf(13.000), "v2"),
                 new Product("Books", 5, BigDecimal.valueOf(100), "v2"),
                 new Product("Headphones", 23, BigDecimal.valueOf(45.99), "v3"),
-                new Product("PC", 2, BigDecimal.valueOf(1456.898), "v3")
+                new Product("Monitor", 3, BigDecimal.valueOf(1000.898), "v5"),
+                new Product("Gamepad", 11, BigDecimal.valueOf(56.99), "v6")
         );
     }
 
