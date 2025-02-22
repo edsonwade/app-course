@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
+@SuppressWarnings("all")
 @Table(name = "products")
 @Data
 @NoArgsConstructor
