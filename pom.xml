@@ -14,6 +14,7 @@
         <module>course-info-server</module>
         <module>spring-boot-course</module>
         <module>course-calling-web</module>
+        <module>course-kafka-event</module>
     </modules>
 
     <properties>
