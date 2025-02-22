@@ -20,7 +20,7 @@ public class ProducerConfig {
         throw new AssertionError("This class cannot be instantiated");
     }
 
-    public static Properties getKafkaProperties() {
+    public static Properties getKafkaProducerProperties() {
         Properties props = new Properties();
         props.setProperty(BOOTSTRAP_SERVERS, HOSTNAME);
         props.setProperty(ACKS, "all");

@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Unit test for simple KafkaEventStreamApp.
+ * Unit test for simple KafkaProducerApp.
  */
-class KafkaEventStreamAppTest {
+class KafkaProducerAppTest {
 
     @Test
     void testApp() {

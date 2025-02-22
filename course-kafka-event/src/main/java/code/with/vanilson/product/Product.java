@@ -1,4 +1,4 @@
-package code.with.vanilson.producer;
+package code.with.vanilson.product;
 
 import java.math.BigDecimal;
 

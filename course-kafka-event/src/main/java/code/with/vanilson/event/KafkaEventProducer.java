@@ -1,7 +1,7 @@
 package code.with.vanilson.event;
 
 import code.with.vanilson.config.ProducerConfig;
-import code.with.vanilson.producer.Product;
+import code.with.vanilson.product.Product;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
@@ -28,14 +28,14 @@ public class KafkaEventProducer {
     }
 
     public static void sendMessge() {
-        Properties props = ProducerConfig.getKafkaProperties();
+        Properties props = ProducerConfig.getKafkaProducerProperties();
         for (int j = 0; j < 2; j++) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 100_00; i++) {
                 String key = "truck_id " + i;
                 List<Product> value = getProducts();
                 try (KafkaProducer<String, List<Product>> producer = new KafkaProducer<>(props)) {
-                    ProducerRecord<String, List<Product>> listRecord  = new ProducerRecord<>(TOPIC, key, value);
-                    producer.send(listRecord , (metadata, exception) -> {
+                    ProducerRecord<String, List<Product>> listRecord = new ProducerRecord<>(TOPIC, key, value);
+                    producer.send(listRecord, (metadata, exception) -> {
                         if (exception != null) {
                             log.error("Error sending record", exception);
                         } else {
@@ -57,7 +57,7 @@ public class KafkaEventProducer {
 
     }
 
-    private static List<Product> getProducts() {
+    public static List<Product> getProducts() {
         return List.of(
                 new Product("Tv", 12, BigDecimal.valueOf(100_00), "v1"),
                 new Product("Xbox", 2, BigDecimal.valueOf(12000.9999), "v1"),

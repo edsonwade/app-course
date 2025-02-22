@@ -1,6 +1,6 @@
 package code.with.vanilson.mapper;
 
-import code.with.vanilson.producer.Product;
+import code.with.vanilson.product.Product;
 import com.google.gson.Gson;
 import org.apache.kafka.common.header.Headers;
 import org.apache.kafka.common.serialization.Serializer;
