@@ -1,8 +1,10 @@
 package code.with.vanilson;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import static org.springframework.boot.SpringApplication.run;
 
 /**
  * TicketApplication
@@ -11,10 +13,16 @@ import static org.springframework.boot.SpringApplication.run;
  * @version 1.0
  * @since 2024-12-02
  */
-@SpringBootApplication
-public class TicketApplication {
+@SpringBootApplication(scanBasePackages = "code.with.vanilson.jsp")
+public class TicketApplication extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(TicketApplication.class);
+    }
+
 
     public static void main(String... args) {
-        run(TicketApplication.class);
+        SpringApplication.run(TicketApplication.class,args);
     }
 }

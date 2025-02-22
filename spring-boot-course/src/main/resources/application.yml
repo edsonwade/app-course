@@ -61,8 +61,10 @@ management:
     health:
       show-details: always
 
-
+  devtools:
+    livereload:
+      enabled: true
 
 
 server:
-  port: 8085
+  port: 8082

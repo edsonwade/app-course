@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
+@SuppressWarnings("JpaDataSourceORMInspection")
 public class Venue {
 
     @Id
