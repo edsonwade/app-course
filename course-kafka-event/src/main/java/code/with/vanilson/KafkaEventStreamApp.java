@@ -7,7 +7,7 @@ import code.with.vanilson.event.KafkaEventProducer;
  */
 public class KafkaEventStreamApp {
     public static void main(String[] args) {
-        //Producer sent a message
+        //Product sent a message
         KafkaEventProducer.sendMessge();
     }
 }

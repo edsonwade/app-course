@@ -1,5 +1,6 @@
 package code.with.vanilson.config;
 
+import code.with.vanilson.mapper.ListProducerSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
@@ -25,7 +26,7 @@ public class ProducerConfig {
         props.setProperty(ACKS, "all");
         props.setProperty(RETRIES, Integer.toString(Integer.MAX_VALUE));
         props.setProperty(PRODUCER_KEY_SERIALIZER, StringSerializer.class.getName());
-        props.setProperty(PRODUCER_VALUE_SERIALIZER, StringSerializer.class.getName());
+        props.setProperty(PRODUCER_VALUE_SERIALIZER, ListProducerSerializer.class.getName());
         props.setProperty("linger.ms.config", "3");
         props.setProperty("compression.type", "snappy");
         props.setProperty("batch.size", Integer.toString(32 * 1024));
